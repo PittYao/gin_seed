@@ -1,0 +1,62 @@
+Name: seed
+ListenOn: :8008 # 服务端口
+Mode: debug # release debug
+
+Mysql:
+  Url: "root:root@tcp(127.0.0.1:3306)/stream_record?charset=utf8mb4&parseTime=True&loc=Local"
+
+
+# 静态文件代理
+ # 访问app/static/html/hello.html [http://localhost:8008/statics/html/hello.html]
+ # 支持的文件类型在 app/statics/statics go:embed 来支持
+Statics:
+  Url: /statics
+
+
+########## swagger 相关配置
+### 生成doc文档
+  # 在app/main.go下 执行生成下面命令
+  # swag init --dir ./ --generalInfo internal/routes/routes.go --propertyStrategy snakecase --output internal/routes/docs
+  # 重启程序后生效 [访问 http://localhost:8008/doc/index.html ]
+Swagger:
+  # 文档标题
+  Title: xx project swagger apidocs
+  # 文档描述
+  Desc: project desc
+  # 请求地址，端口要和 server.addr 一致，浏览器访问时需要区分 127.0.0.1 和 localhost
+  Host: localhost:8008
+  # 访问地址前缀 http://localhost:8008/doc/index.html
+  Url: /doc
+  # 请求地址的 basepath
+  BasePath: /
+  # 支持的请求 schemes
+  Schemes:
+    - http
+
+
+########## basic auth 相关配置
+BasicAuth:
+  # 登录用户名
+  UserName: admin
+  # 登录密码
+  Password: admin
+
+######### zap log
+Zap:
+  # 日志格式，可选值： json console [开发时用console 正式时用json]
+  Format: console
+  # 日志文件夹名
+  Dir: logs
+  # 最大日志文件大小 单位： M
+  MaxSize: 1
+  # 备份文件最大保存天数
+  MaxAge: 7
+  # 最大保存的备份文件数
+  MaxBackups: 10
+  # 是否压缩备份文件
+  Compress: true
+  # 压缩文件名是否使用 localtime
+  Localtime: true
+  # 是否在日志中输出源码所在的行
+  ShowLine: true
+
