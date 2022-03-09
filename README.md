@@ -43,7 +43,6 @@
 │      ├─html
 │      └─js
 ├─deploy //  部署资料
-│  ├─nginx
 │  └─sql 
 └─logs // 日志文件夹
 
