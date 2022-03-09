@@ -21,7 +21,7 @@ func RecordOne(c *gin.Context) {
 		return
 	}
 
-	recordOne := dao.GetOneById(1)
+	recordOne := dao.GetOneById(2)
 
 	response.OK(c, recordOne)
 }

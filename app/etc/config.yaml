@@ -1,38 +1,35 @@
 Name: seed
-ListenOn: :8008 # 服务端口
+ListenOn: :80 # 服务端口
 Mode: debug # release debug
 
+## Mysql
 Mysql:
   Url: "root:root@tcp(127.0.0.1:3306)/stream_record?charset=utf8mb4&parseTime=True&loc=Local"
+#  Url: ""
+
+# redis
+Redis:
+  # redis 数据服务器ip和端口
+  Addr: '127.0.0.1:6379'
+  # 指定连接的数据库 默认连数据库0
+  DB: 0
+  # 连接密码
+  Password: ''
+  # 最大重试次数
+  MaxRetries: 3
+  # 最大空闲连接数
+  MinIdleConns: 5
+  # 连接池大小
+  PoolSize: 10
 
 
 # 静态文件代理
  # 访问app/static/html/hello.html [http://localhost:8008/statics/html/hello.html]
  # 支持的文件类型在 app/statics/statics go:embed 来支持
+
+##  静态文件代理
 Statics:
   Url: /statics
-
-
-########## swagger 相关配置
-### 生成doc文档
-  # 在app/main.go下 执行生成下面命令
-  # swag init --dir ./ --generalInfo internal/routes/routes.go --propertyStrategy snakecase --output internal/routes/docs
-  # 重启程序后生效 [访问 http://localhost:8008/doc/index.html ]
-Swagger:
-  # 文档标题
-  Title: xx project swagger apidocs
-  # 文档描述
-  Desc: project desc
-  # 请求地址，端口要和 server.addr 一致，浏览器访问时需要区分 127.0.0.1 和 localhost
-  Host: localhost:8008
-  # 访问地址前缀 http://localhost:8008/doc/index.html
-  Url: /doc
-  # 请求地址的 basepath
-  BasePath: /
-  # 支持的请求 schemes
-  Schemes:
-    - http
-
 
 ########## basic auth 相关配置
 BasicAuth:
@@ -60,3 +57,22 @@ Zap:
   # 是否在日志中输出源码所在的行
   ShowLine: true
 
+########## swagger 相关配置
+### 生成doc文档
+# 在app/main.go下 执行生成下面命令
+# swag init --dir ./ --generalInfo internal/routes/routes.go --propertyStrategy snakecase --output internal/routes/docs
+# 重启程序后生效 [访问 http://localhost:8008/doc/index.html ]
+Swagger:
+  # 文档标题
+  Title: xx project swagger apidocs
+  # 文档描述
+  Desc: project desc
+  # 请求地址，端口要和 server.addr 一致，浏览器访问时需要区分 127.0.0.1 和 localhost
+  Host: localhost:80
+  # 访问地址前缀 http://localhost:8008/doc/index.html
+  Url: /doc
+  # 请求地址的 basepath
+  BasePath: /
+  # 支持的请求 schemes
+  Schemes:
+    - http

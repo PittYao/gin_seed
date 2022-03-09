@@ -19,10 +19,12 @@ type RecordOnePageReq struct {
 	request.Pager
 }
 
-func GetOneById(id int) *RecordOne {
-	var recordOne RecordOne
+func GetOneById(id int) (recordOne *RecordOne) {
 	global.DB.Where("id = ?", id).Find(&recordOne)
-	return &recordOne
+	if recordOne.ID == 0 {
+		return nil
+	}
+	return
 }
 
 func Page(pageReq RecordOnePageReq) (pageRecordOne PageRecordOne, err error) {

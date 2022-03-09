@@ -1,9 +1,11 @@
 # gin的单体结构项目
 - [x] [gin](https://github.com/gin-gonic/gin)
 - [x] [zap](https://github.com/uber-go/zap)
-- [x] [gorm](https://github.com/go-gorm/gorm)
+- [x] [gorm](https://gorm.io/zh_CN/docs/)
+- [x] [redis](https://github.com/go-redis/redis/v8)
 - [x] [db2gorm](https://github.com/qmhball/db2gorm)
 - [x] [swagger](https://github.com/swaggo/gin-swagger)
+- [x] [gout](https://github.com/guonaihong/gout)
 
 # 项目结构
 ```
@@ -13,13 +15,19 @@
 │  │  ├─ginconfig // gin配置
 │  │  ├─global // 全局对象
 │  │  ├─globalkey // 全局常量
+│  │  ├─redis // redis
+│  │    └─redis_test // redis 使用示例
 │  │  ├─request // 分页请求体
 │  │  ├─response // 统一响应体
 │  │  ├─tool // 工具包
 │  │  └─zap // zap日志包
+│  │ 
 │  ├─etc // 配置文件
+│  │  └─config.yaml // 配置文件
+│  │  └─config.go // 配置文件实例
 │  ├─internal // 业务代码目录
 │  │  ├─dao 
+│  │  ├─httpclient // 三方httpclient示例
 │  │  ├─middleware // 中间件
 │  │  ├─model // 生成model
 │  │  │  ├─ffmpegtemplate

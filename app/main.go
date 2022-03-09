@@ -5,6 +5,7 @@ import (
 	"github.com/PittYao/gin_seed/app/common/db"
 	"github.com/PittYao/gin_seed/app/common/ginconfig"
 	"github.com/PittYao/gin_seed/app/common/global"
+	"github.com/PittYao/gin_seed/app/common/redis"
 	"github.com/PittYao/gin_seed/app/common/zap"
 	"github.com/PittYao/gin_seed/app/internal/middleware"
 	"github.com/PittYao/gin_seed/app/internal/routes"
@@ -12,7 +13,7 @@ import (
 )
 
 // configFile path
-var configFile = flag.String("c", "app/etc/config.yaml", "the config file")
+var configFile = flag.String("c", "etc/config.yaml", "the config file")
 
 func main() {
 	initApp()
@@ -36,5 +37,8 @@ func initApp() {
 
 	// init mysql
 	global.DB = db.GormMySQL()
+
+	// init redis
+	global.REDIS = redis.Redis()
 
 }
